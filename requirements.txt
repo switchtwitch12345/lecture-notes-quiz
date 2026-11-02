@@ -1,0 +1,11 @@
+torch==2.13.0
+torchaudio==2.11.0
+transformers==5.15.1
+tokenizers==0.22.2
+safetensors==0.8.0
+huggingface_hub==1.28.0
+sentencepiece==0.2.2
+numpy==1.26.4
+scipy==1.17.1
+soundfile==0.14.0
+gradio==6.31.0
