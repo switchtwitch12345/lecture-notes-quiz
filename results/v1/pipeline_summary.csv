@@ -1,0 +1,7 @@
+lecture,wer,cer,quiz_valid,failed_attempts,questions,asr_seconds,quiz_seconds
+lecture_01,0.071,0.022,True,1,5,4.2,63.6
+lecture_02,0.024,0.007,True,0,5,16.5,21.2
+lecture_03,0.014,0.003,True,1,5,2.2,32.3
+lecture_04,0.029,0.011,True,1,5,2.2,33.7
+lecture_05,0.104,0.032,True,1,5,1.9,31.8
+lecture_06,0.068,0.022,True,1,5,1.9,35.5

@@ -1,0 +1,8 @@
+Fetching 9 files:   0%|          | 0/9 [00:00<?, ?it/s]Fetching 9 files: 100%|██████████| 9/9 [00:00<00:00, 1922.52it/s]
+Loading weights:   0%|          | 0/338 [00:00<?, ?it/s]Loading weights:   0%|          | 1/338 [00:02<14:17,  2.55s/it]Loading weights:  51%|█████     | 171/338 [00:02<00:01, 86.39it/s]Loading weights:  66%|██████▌   | 223/338 [00:03<00:01, 84.37it/s]Loading weights:  75%|███████▌  | 255/338 [00:03<00:01, 81.40it/s]Loading weights:  82%|████████▏ | 277/338 [00:04<00:00, 85.85it/s]Loading weights:  88%|████████▊ | 296/338 [00:04<00:00, 79.42it/s]Loading weights:  92%|█████████▏| 311/338 [00:04<00:00, 83.66it/s]Loading weights:  96%|█████████▌| 325/338 [00:04<00:00, 83.90it/s]Loading weights: 100%|█████████▉| 337/338 [00:04<00:00, 83.32it/s]Loading weights: 100%|██████████| 338/338 [00:04<00:00, 70.55it/s]
+{'lecture': 'lecture_01', 'wer': 0.071, 'cer': 0.022, 'quiz_valid': True, 'failed_attempts': 1, 'questions': 5, 'asr_seconds': 6.0, 'quiz_seconds': 48.8}
+{'lecture': 'lecture_02', 'wer': 0.024, 'cer': 0.007, 'quiz_valid': True, 'failed_attempts': 1, 'questions': 5, 'asr_seconds': 2.8, 'quiz_seconds': 34.2}
+{'lecture': 'lecture_03', 'wer': 0.014, 'cer': 0.003, 'quiz_valid': True, 'failed_attempts': 0, 'questions': 5, 'asr_seconds': 2.2, 'quiz_seconds': 18.6}
+{'lecture': 'lecture_04', 'wer': 0.029, 'cer': 0.011, 'quiz_valid': True, 'failed_attempts': 0, 'questions': 5, 'asr_seconds': 2.2, 'quiz_seconds': 17.6}
+{'lecture': 'lecture_05', 'wer': 0.104, 'cer': 0.032, 'quiz_valid': True, 'failed_attempts': 1, 'questions': 5, 'asr_seconds': 2.1, 'quiz_seconds': 45.5}
+{'lecture': 'lecture_06', 'wer': 0.068, 'cer': 0.022, 'quiz_valid': True, 'failed_attempts': 1, 'questions': 5, 'asr_seconds': 3.2, 'quiz_seconds': 31.1}

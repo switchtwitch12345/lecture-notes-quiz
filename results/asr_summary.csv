@@ -1,0 +1,4 @@
+language,clips,wer,cer,seconds
+Hindi,40,0.0906,0.0306,22.0
+Kannada,40,0.2554,0.0806,22.3
+Tamil,40,0.2024,0.0575,18.9
