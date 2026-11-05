@@ -1,0 +1,325 @@
+/* Ink and paper palette: warm paper, ink text, coral accent. Light only; the dark set mirrors it.
+   Gradio switches to its .dark variables when the system is dark, so the palette is set there too. */
+:root, .dark, .gradio-container.dark {
+  --bg: #f3efe6;
+  --surface: #fffdf9;
+  --surface-2: #f5f1e8;
+  --ink: #161a24;
+  --mut: #4d5361;
+  --line: rgba(22, 26, 36, 0.13);
+  --accent: #ff8c5a;         /* coral: primary action, headline mark, tab underline */
+  --accent-press: #f0743f;
+  --accent-tint: #ffe9dc;
+  --accent-ink: #9a3d12;     /* coral for text: 6.8:1 on white, 6.2:1 on the tint */
+  --highlight: #ff8c5a;
+  --display: 'Bricolage Grotesque', 'Arial Narrow', system-ui, sans-serif;
+  --sans: 'Hanken Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --r: 16px;
+  --sh: 0 1px 1px rgba(22, 26, 36, 0.04), 0 2px 5px rgba(22, 26, 36, 0.04), 0 20px 40px -20px rgba(22, 26, 36, 0.24);
+  --ease: cubic-bezier(0.32, 0.72, 0, 1);
+  color-scheme: light;
+
+  /* Gradio's own theme variables, so its components pick up the palette too */
+  --body-background-fill: var(--bg);
+  --background-fill-primary: var(--surface);
+  --background-fill-secondary: var(--surface-2);
+  --block-background-fill: transparent;
+  --block-border-color: transparent;
+  --block-border-width: 0;
+  --block-label-background-fill: transparent;
+  --block-label-border-width: 0;
+  --block-label-text-color: var(--mut);
+  --block-title-text-color: var(--mut);
+  --block-shadow: none;
+  --body-text-color: var(--ink);
+  --body-text-color-subdued: var(--mut);
+  --input-background-fill: var(--surface-2);
+  --input-border-color: var(--line);
+  --border-color-primary: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-tint);
+  --button-primary-background-fill: var(--accent);
+  --button-primary-background-fill-hover: var(--accent-press);
+  --button-primary-text-color: var(--ink);
+  --button-primary-border-color: var(--accent);
+  --link-text-color: var(--accent-ink);
+  --table-border-color: var(--line);
+}
+
+html, body, .gradio-container {
+  background: var(--bg) !important;
+  color: var(--ink) !important;
+  font-family: var(--sans) !important;
+}
+::selection {
+  background: var(--highlight);
+  color: var(--ink);
+}
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* soft coral glow and dot grid behind the page */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background:
+    radial-gradient(38% 34% at 18% 14%, rgba(255, 140, 90, 0.26), transparent 70%),
+    radial-gradient(34% 30% at 86% 8%, rgba(255, 200, 120, 0.30), transparent 70%),
+    radial-gradient(42% 38% at 72% 88%, rgba(240, 116, 63, 0.16), transparent 70%);
+}
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: radial-gradient(rgba(22, 26, 36, 0.14) 1px, transparent 1.3px);
+  background-size: 24px 24px;
+  mask-image: radial-gradient(ellipse 90% 70% at 50% 18%, #000 25%, rgba(0, 0, 0, 0.3) 70%, rgba(0, 0, 0, 0.1));
+}
+
+/* header */
+.hero-app {
+  padding: 16px 0 32px;
+}
+.hero-app h1 {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(40px, 6.4vw, 76px);
+  line-height: 0.98;
+  letter-spacing: -0.035em;
+  margin: 0 0 22px;
+  color: var(--ink);
+  text-wrap: balance;
+}
+.hero-app h1 mark {
+  background: linear-gradient(var(--highlight), var(--highlight)) 0 90% / 100% 0.86em no-repeat;
+  color: var(--ink);
+  padding: 0 0.06em;
+  border-radius: 0.1em;
+}
+.hero-app .lede {
+  font-size: clamp(17px, 2vw, 20px);
+  color: var(--mut);
+  max-width: 38em;
+  margin: 0 0 22px;
+}
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.chips li {
+  font: 700 14px var(--sans);
+  color: var(--ink);
+  padding: 8px 15px;
+  border-radius: 99px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+}
+.chips li::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 25%, transparent);
+}
+
+/* two panels: input and result. Each column is a card; the controls inside sit flat on it. */
+#input-panel, #result-panel {
+  background: var(--surface) !important;
+  border: 1px solid var(--line) !important;
+  border-radius: var(--r) !important;
+  box-shadow: var(--sh) !important;
+  padding: 24px !important;
+  gap: 16px !important;
+}
+.panel-title {
+  margin: 0 0 4px;
+}
+.panel-title h3 {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 26px;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin: 0;
+  color: var(--ink);
+}
+#panels .block,
+#panels .form,
+#panels .form > .block,
+#panels .gap {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+#panels label,
+#panels label span,
+#panels .block-title,
+#panels [data-testid="block-info"],
+#panels .block-info {
+  font: 600 14px var(--sans) !important;
+  color: var(--mut) !important;
+  background: transparent !important;
+  opacity: 1 !important;
+}
+#panels textarea,
+#panels input,
+#panels select {
+  font-family: var(--sans) !important;
+  background: var(--surface-2) !important;
+  color: var(--ink) !important;
+  border: 1px solid var(--line) !important;
+  border-radius: 12px !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+#panels textarea {
+  font-size: 16px !important;
+  line-height: 1.6 !important;
+}
+/* the recording drop zone */
+#panels .upload-container {
+  background: var(--surface-2) !important;
+  border: 1.5px dashed rgba(22, 26, 36, 0.22) !important;
+  border-radius: 12px !important;
+}
+#panels .upload-container *,
+#panels .upload-text,
+#panels .upload-text span,
+#panels .wrap .or {
+  color: var(--mut) !important;
+  opacity: 1 !important;
+}
+#panels [data-testid="block-label"],
+#panels .label-wrap {
+  background: transparent !important;
+  border: 0 !important;
+  color: var(--mut) !important;
+}
+
+/* primary action: a full-width pill in coral, with ink text (7.6:1) */
+button.primary {
+  font-family: var(--sans) !important;
+  font-weight: 700 !important;
+  font-size: 16px !important;
+  border-radius: 99px !important;
+  min-height: 52px !important;
+  background: var(--accent) !important;
+  color: var(--ink) !important;
+  border: 1px solid var(--accent) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 8px 22px -10px rgba(240, 116, 63, 0.6) !important;
+  transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease), background 0.2s !important;
+}
+button.primary:hover {
+  transform: translateY(-2px);
+  background: var(--accent-press) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 12px 26px -10px rgba(240, 116, 63, 0.7) !important;
+}
+button.primary:active {
+  transform: scale(0.98);
+}
+
+/* status: a tinted pill for the current state, including the empty one */
+.status-line {
+  margin: 0 0 12px;
+}
+.status-line p {
+  display: inline-block;
+  margin: 0;
+  font: 600 15px var(--sans);
+  color: var(--accent-ink);
+  background: var(--accent-tint);
+  border-radius: 99px;
+  padding: 10px 16px;
+}
+
+/* tabs: a coral underline under the selected tab */
+#panels [role="tablist"] {
+  border-bottom: 1px solid var(--line) !important;
+  background: transparent !important;
+}
+#panels [role="tab"] {
+  font: 600 15px var(--sans) !important;
+  color: var(--mut) !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-bottom: 3px solid transparent !important;
+  padding: 10px 14px !important;
+}
+#panels [role="tab"][aria-selected="true"] {
+  color: var(--ink) !important;
+  border-bottom-color: var(--accent) !important;
+}
+
+/* notes and quiz */
+.result {
+  min-height: 320px;
+  padding-top: 8px !important;
+}
+.result .prose,
+.prose {
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--ink);
+}
+.prose h1, .prose h2, .prose h3 {
+  font-family: var(--display);
+  letter-spacing: -0.02em;
+}
+.prose ul li {
+  margin-bottom: 6px;
+}
+.prose p em {
+  color: var(--accent-ink);
+  font-style: normal;
+  font-weight: 700;
+}
+.prose hr {
+  border-color: var(--line);
+}
+
+.footnote {
+  margin-top: 20px;
+  font-size: 14px;
+  color: var(--mut);
+  max-width: 60em;
+}
+.footnote p {
+  margin: 0;
+}
+
+footer {
+  display: none !important;
+}
+
+@media (max-width: 760px) {
+  #input-panel, #result-panel { padding: 18px !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+  button.primary:hover,
+  button.primary:active {
+    transform: none !important;
+  }
+}

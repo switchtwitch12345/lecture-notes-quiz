@@ -1,4 +1,6 @@
 """Gradio app: lecture audio (or a transcript) in, English notes and a five-question quiz out."""
+import os
+
 import gradio as gr
 
 from lecture_notes import asr, quiz, translate
@@ -43,28 +45,65 @@ def process(audio_path, transcript_text, language):
     return transcript, english, _format_notes(data["notes"]), _format_quiz(data["questions"]), status
 
 
-with gr.Blocks(title="Lecture Notes and Quiz") as demo:
-    gr.Markdown(
-        "# Lecture Notes and Quiz\n"
-        "Upload a Hindi, Kannada or Tamil lecture recording, or paste its transcript. "
-        "You get notes and five multiple-choice questions with answers.\n\n"
-        "Speech recognition uses SraVaani-1.0. Translation uses IndicTrans2 (1B). Notes and quiz use "
-        "Qwen2.5-1.5B-Instruct, a small model that sometimes gets facts wrong, so check the output."
+FONTS = (
+    '<link rel="preconnect" href="https://fonts.googleapis.com">'
+    '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
+    '<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@700;800'
+    '&family=Hanken+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">'
+)
+STYLE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "assets", "style.css")
+
+with gr.Blocks(title="Lecture Notes and Quiz", fill_width=True) as demo:
+    gr.HTML(
+        '<header class="hero-app">'
+        '<h1>Lecture in. <mark>Notes and quiz out.</mark></h1>'
+        '<p class="lede">Upload a Hindi, Kannada or Tamil lecture recording, or paste its transcript. '
+        'You get notes and five multiple-choice questions with answers.</p>'
+        '<ul class="chips">'
+        '<li>SraVaani-1.0 speech</li>'
+        '<li>IndicTrans2 translation</li>'
+        '<li>Qwen2.5-1.5B notes and quiz</li>'
+        '</ul>'
+        '</header>'
     )
-    with gr.Row():
-        audio = gr.Audio(sources=["upload"], type="filepath", label="Lecture recording (WAV)")
-        transcript_box = gr.Textbox(
-            label="Transcript (optional: paste or correct; used instead of the recording if filled in)",
-            lines=8,
-        )
-    language = gr.Dropdown(choices=list(translate.LANGUAGE_CODES), value="Hindi", label="Language of the lecture")
-    run = gr.Button("Generate notes and quiz", variant="primary")
-    status = gr.Markdown()
-    transcript_out = gr.Textbox(label="Transcript", lines=5, interactive=False)
-    english_out = gr.Textbox(label="English translation (the notes and quiz are made from this)", lines=5, interactive=False)
-    with gr.Row():
-        notes_out = gr.Markdown(label="Notes")
-        quiz_out = gr.Markdown(label="Quiz")
+    with gr.Row(equal_height=False, elem_id="panels"):
+        with gr.Column(scale=5, elem_id="input-panel"):
+            gr.Markdown("### Your lecture", elem_classes="panel-title")
+            audio = gr.Audio(sources=["upload"], type="filepath", label="Recording (WAV)")
+            transcript_box = gr.Textbox(
+                label="Transcript, optional",
+                info="Paste or correct it here. A filled-in transcript is used instead of the recording.",
+                lines=6,
+            )
+            language = gr.Dropdown(choices=list(translate.LANGUAGE_CODES), value="Hindi", label="Language")
+            run = gr.Button("Generate notes and quiz", variant="primary", size="lg")
+
+        with gr.Column(scale=7, elem_id="result-panel"):
+            gr.Markdown("### Result", elem_classes="panel-title")
+            status = gr.Markdown(
+                "Ready. Upload a recording or paste a transcript to begin.", elem_classes="status-line"
+            )
+            with gr.Tabs():
+                with gr.Tab("Notes"):
+                    notes_out = gr.Markdown(elem_classes="result")
+                with gr.Tab("Quiz"):
+                    quiz_out = gr.Markdown(elem_classes="result")
+                with gr.Tab("English"):
+                    english_out = gr.Textbox(
+                        show_label=False, lines=8, interactive=False,
+                        placeholder="The English translation appears here. Notes and quiz are made from it.",
+                    )
+                with gr.Tab("Transcript"):
+                    transcript_out = gr.Textbox(
+                        show_label=False, lines=8, interactive=False,
+                        placeholder="The transcript in the lecture's language appears here.",
+                    )
+
+    gr.Markdown(
+        "Qwen2.5-1.5B is a small model and sometimes gets facts wrong. Check the notes and questions "
+        "against the lecture before you rely on them.",
+        elem_classes="footnote",
+    )
 
     run.click(
         process,
@@ -73,4 +112,4 @@ with gr.Blocks(title="Lecture Notes and Quiz") as demo:
     )
 
 if __name__ == "__main__":
-    demo.launch()
+    demo.launch(css_paths=[STYLE], head=FONTS)

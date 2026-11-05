@@ -1,0 +1,51 @@
+lecture,number,question,option_A,option_B,option_C,option_D,marked_answer,reviewer_answer_correct,reviewer_supported_by_lecture,reviewer_notes
+lecture_01,1,What does Newton's first law state?,Objects accelerate without any force acting on them.,Objects maintain their velocity indefinitely without any forces.,Objects always move in a straight line.,Objects stop immediately after being pushed.,B,YES,YES,
+lecture_01,2,"According to Newton's second law, what is the relationship between force, mass, and acceleration?",Force is inversely proportional to mass.,Force is directly proportional to mass.,Force is directly proportional to acceleration.,Force is independent of both mass and acceleration.,C,UNCLEAR,YES,"C is correct from the lecture formula, but B (proportional to mass) is also true"
+lecture_01,3,How does Newton's third law apply when pushing against a wall?,We push harder than the wall.,The wall applies an equal but opposite force.,Both push equally hard.,Neither exerts any force.,B,YES,YES,
+lecture_01,4,Which statement correctly describes Newton's first law?,Objects resist changes in their motion.,Objects accelerate uniformly under constant force.,Objects move in a straight line due to inertia.,Objects require no force to change direction.,A,UNCLEAR,YES,"A is true, but C ('due to inertia') is also defensible"
+lecture_01,5,"If you push a box across a floor, which of the following best explains why the box moves?",The box resists your push because it wants to stay still.,Your push causes the box to accelerate due to its inertia.,"The floor provides friction, opposing your push.",The box's weight pulls it down.,B,NO,PARTLY,"Push causes acceleration, but 'due to its inertia' is wrong; friction is not in the lecture"
+lecture_02,1,What does fluorokhyl absorb?,Heat,Light,Water,Carbon Dioxide,B,YES,YES,Question name 'fluorokhyl' is a translation error for chlorophyll
+lecture_02,2,Where does photosynthesis primarily occur in plants?,Stem,Roots,Leaves,Fruit,C,YES,YES,
+lecture_02,3,What is the primary function of oxygen produced during photosynthesis?,To provide energy for plant growth,To support human and animal respiration,To increase soil fertility,To enhance plant reproduction,B,YES,YES,
+lecture_02,4,How do plants benefit humans and animals through photosynthesis?,By providing shade,By producing oxygen,By increasing humidity,By enhancing soil pH,B,YES,YES,
+lecture_02,5,Which part of the plant contains the chlorophyll that captures light energy?,Stem,Leaf,Root,Seed,B,YES,YES,
+lecture_03,1,What does the term 'evaporation' refer to?,The transformation of water from solid to liquid,The change of water from liquid to gas,The conversion of water from gas to liquid,The transition of water from liquid to solid,B,YES,YES,
+lecture_03,2,How do plants contribute to the water cycle?,By absorbing water from soil,By releasing water vapor through stomata,By converting water into energy,By freezing water in ice caps,B,YES,PARTLY,Leaf water release is in the lecture; 'stomata' is not
+lecture_03,3,Where does cloud formation primarily occur?,On the ground,At the base of mountains,Above the Earth's surface,Underneath the Earth's crust,C,YES,PARTLY,Cloud formation is in the lecture; 'above the surface' is an inference
+lecture_03,4,Which part of the water cycle involves the movement of water between land bodies like rivers and seas?,Condensation,Precipitation,Collection,Runoff,D,YES,PARTLY,Concept in lecture; the term 'runoff' is not
+lecture_03,5,What happens to water after it falls as rain on the Earth’s surface?,It remains stationary until absorbed by plants,It flows downhill towards rivers and oceans,It freezes and becomes snow,It evaporates back into the air,B,YES,YES,
+lecture_04,1,Who chaired the drafting committee for the Indian Constitution?,V P Singh,Dr. Bhimrao Ambedkar,Lal Bahadur Shastri,Sardar Vallabhbhai Patel,B,YES,YES,
+lecture_04,2,What does the Constitution of India provide to its citizens?,Basic education,Fundamental rights,Healthcare services,Social security benefits,B,YES,YES,
+lecture_04,3,How long did it take to prepare the Indian Constitution?,Less than one year,About two years,Three years,More than four years,C,YES,YES,
+lecture_04,4,Which body prepared the Indian Constitution?,National Parliament,Constituent Assembly,Supreme Court,State Legislatures,B,YES,YES,
+lecture_04,5,In what year did the Indian Constitution come into effect?,1947,1950,1953,1958,B,YES,YES,
+lecture_05,1,How many chambers does the human heart have?,Two atria and two ventricles,Three atria and three ventricles,Four atria and four ventricles,Five atria and five ventricles,A,YES,YES,
+lecture_05,2,In which direction does blood flow from the heart to the body?,From the right atrium to the right ventricle then to the lungs,From the left atrium to the left ventricle then to the body,From the left atrium to the right ventricle then to the body,From the right atrium to the left ventricle then to the body,B,YES,PARTLY,Left/right path is not stated; the lecture only says the heart pumps blood round the body
+lecture_05,3,What separates the right and left sides of the heart?,The pulmonary vein,The aortic valve,The interventricular septum,The coronary sinus,C,YES,PARTLY,Septum is not named; lecture only says a wall separates the sides
+lecture_05,4,Which vessels carry blood to the body?,Pulmonary arteries,Azygos veins,Superior vena cava,Arteries,D,YES,PARTLY,Lecture says 'blood vessels' generally; 'arteries' is general knowledge
+lecture_05,5,What happens to the blood when it leaves the right side of the heart?,It mixes with oxygen-depleted blood in the lungs,It travels directly to the lungs without mixing,It goes straight to the liver,It returns to the left side of the heart,A,NO,NO,Right side sends oxygen-poor blood to the lungs without mixing; the lecture says the sides do not mix
+lecture_06,1,What does the CPU do?,Processes instructions,Stores data permanently,Outputs results directly,Turns off the power,A,YES,YES,
+lecture_06,2,Which device shows results after processing?,Keyboard,Printer,Monitor,Central Processing Unit,C,UNCLEAR,YES,"Printer also shows results, and the lecture names it"
+lecture_06,3,What happens to RAM content when power is turned off?,It remains unchanged,It gets erased,It becomes permanent storage,It turns into a monitor,B,YES,YES,
+lecture_06,4,What type of storage is used for long-term information?,RAM,Hard drive,USB flash drive,Floppy disk,B,UNCLEAR,YES,Hard disk is the only long-term store named; USB and floppy are also persistent
+lecture_06,5,How can you tell that a disk has been lost?,By turning it upside down,By checking the manufacturer's website,By looking at the surface for signs of wear,By using a magnet,C,NO,NO,No answer in the lecture; the question has no basis
+lecture_07,1,What is the primary composition of the Earth's core?,Silicon,Iron and Nickel,Calcium and Magnesium,Oxygen and Hydrogen,B,YES,YES,
+lecture_07,2,Which layer of the Earth is directly below the crust?,Mantle,Crust,Core,Tectonic Plates,A,YES,YES,
+lecture_07,3,How do earthquakes typically occur according to the given information?,By volcanic activity,Through tectonic plate movements,From solar radiation,Due to meteorite impacts,B,YES,YES,
+lecture_07,4,What distinguishes the mantle from other layers of the Earth?,It is the thickest layer,It is composed of liquid rock,It is located between the crust and core,It has no solid material,C,UNCLEAR,YES,"Mantle is also the thickest layer, which is true but not stated in the lecture"
+lecture_07,5,What is the thickness of the Earth's crust compared to its mantle?,Thicker than the mantle,About the same as the mantle,Less thick than the mantle,More than twice as thick as the mantle,C,YES,YES,
+lecture_08,1,What do red blood cells primarily transport?,Oxygen,Carbon dioxide,Glucose,Nutrients,A,YES,YES,
+lecture_08,2,Which cells in the blood are responsible for fighting off diseases?,Red blood cells,White blood cells,Platelets,Fibroblasts,B,YES,YES,
+lecture_08,3,What role do platelets play in the body?,Transporting nutrients throughout the body,Producing hormones,Clotting blood vessels,Removing waste products,C,YES,YES,
+lecture_08,4,What gives blood its characteristic yellow color?,Hemoglobin,Iron,Albumin,Cholesterol,A,NO,PARTLY,No option matches; the lecture says plasma is the yellow fluid
+lecture_08,5,Which component of blood consists mainly of water and proteins?,Red blood cells,White blood cells,Platelets,Plasma,D,YES,YES,
+lecture_09,1,What is the position of Earth relative to the Sun?,Second,Third,Fourth,Fifth,B,YES,YES,
+lecture_09,2,Which day is referred to as the Red Planet?,Monday,Tuesday,Wednesday,Thursday,B,NO,PARTLY,Translation error: 'मंगलवार' (Tuesday) for Mars (मंगल). The question is nonsense as written
+lecture_09,3,How many planets are there in our solar system?,Seven,Eight,Nine,Ten,B,YES,YES,
+lecture_09,4,What is the name given to the closest planet to the Sun?,Mercury,Venus,Mars,Jupiter,A,YES,YES,"Lecture names Mercury (बुध); the transcript said 'बुधवार' (Wednesday), so the model relied on general knowledge"
+lecture_09,5,What is the term for the revolution of planets around the Sun?,Rotation,Orbit,Revolution,Cycle,B,UNCLEAR,YES,'Revolution' is also a correct term
+lecture_10,1,What does the law of conservation of energy state?,Energy can be created,Energy can be destroyed,Energy can change forms,Energy can disappear,C,YES,YES,
+lecture_10,2,How does an electric fan work?,It generates new energy,It creates kinetic energy,It converts electrical energy to mechanical energy,It stores potential energy,C,YES,YES,
+lecture_10,3,Where do you find solar cells?,In water bodies,On rooftops,Underground,In deserts,B,YES,NO,Lecture does not say where solar cells are; 'rooftops' is general knowledge
+lecture_10,4,Which two types of energy can transform into each other?,Mechanical and thermal energy,Electricity and light energy,Kinetic and potential energy,Sound and electromagnetic waves,C,UNCLEAR,YES,Electricity and light are also converted into each other by solar cells
+lecture_10,5,Describe what happens in a closed system with respect to energy.,Total energy increases,Total energy decreases,Total energy remains constant,Total energy fluctuates unpredictably,C,YES,YES,
