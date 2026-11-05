@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Multilingual Lecture-to-Notes and Quiz Generator</title>
+<meta name="description" content="CS3235 mini project: Hindi lecture audio to notes and a five-question quiz, with error analysis.">
+<style>
+  :root {
+    --bg: #f3efe6;
+    --surface: #fffdf9;
+    --ink: #161a24;
+    --mut: #4d5361;
+    --line: rgba(22, 26, 36, 0.13);
+    --accent: #ff8c5a;
+    --accent-ink: #9a3d12;
+    --accent-tint: #ffe9dc;
+    --r: 16px;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--bg); color: var(--ink); }
+  body {
+    font: 17px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  main { max-width: 960px; margin: 0 auto; padding: 56px 20px 80px; }
+  h1 { font-size: clamp(40px, 6vw, 68px); line-height: 1; letter-spacing: -0.03em; margin: 0 0 20px; font-weight: 800; }
+  h1 mark { background: var(--accent); color: var(--ink); padding: 0 0.08em; border-radius: 0.1em; }
+  h2 { font-size: 26px; letter-spacing: -0.01em; margin: 56px 0 16px; font-weight: 800; }
+  p.lede { font-size: 20px; color: var(--mut); max-width: 40em; margin: 0 0 28px; }
+  p { margin: 0 0 14px; max-width: 46em; }
+  a { color: var(--accent-ink); font-weight: 600; }
+  a:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 24px; box-shadow: 0 1px 2px rgba(22, 26, 36, 0.06); }
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin: 0 0 8px; }
+  .stat .num { font-size: 34px; font-weight: 800; letter-spacing: -0.02em; }
+  .stat .label { color: var(--mut); font-size: 14px; }
+  table { width: 100%; border-collapse: collapse; font-size: 15px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; }
+  th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { background: #f5f1e8; font-weight: 700; }
+  tr:last-child td { border-bottom: 0; }
+  td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+  .table-wrap { overflow-x: auto; }
+  figure { margin: 0; }
+  figure img { display: block; width: 100%; height: auto; border-radius: 12px; border: 1px solid var(--line); }
+  figcaption { color: var(--mut); font-size: 14px; margin-top: 8px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 24px; padding: 0; list-style: none; }
+  .chips li { font-weight: 600; font-size: 14px; padding: 7px 14px; border-radius: 99px; border: 1px solid var(--line); background: var(--surface); }
+  .note { background: var(--accent-tint); color: var(--accent-ink); border-radius: 12px; padding: 14px 18px; font-size: 15px; max-width: 46em; }
+  .links { display: flex; flex-wrap: wrap; gap: 12px; margin: 20px 0 0; padding: 0; list-style: none; }
+  .links a { display: inline-block; padding: 12px 18px; border-radius: 12px; background: var(--ink); color: #fff; text-decoration: none; font-weight: 700; }
+  .links a.secondary { background: var(--surface); color: var(--ink); border: 1px solid var(--line); }
+  code { font-family: ui-monospace, Menlo, monospace; font-size: 14px; background: #f5f1e8; padding: 2px 6px; border-radius: 6px; }
+  pre { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; overflow-x: auto; font-size: 14px; }
+  footer { margin-top: 64px; color: var(--mut); font-size: 14px; }
+  @media (max-width: 640px) { main { padding: 32px 16px 56px; } .card { padding: 18px; } }
+</style>
+</head>
+<body>
+<main>
+  <h1>Lecture in. <mark>Notes and quiz out.</mark></h1>
+  <p class="lede">A Hindi lecture recording goes in. Notes and five multiple-choice questions come out, with the transcript and English translation shown at each step. CS3235 mini project, built with open AI4Bharat and Indic models.</p>
+  <ul class="chips">
+    <li>SraVaani-1.0 speech</li>
+    <li>IndicTrans2 translation</li>
+    <li>Qwen2.5-1.5B notes and quiz</li>
+  </ul>
+
+  <div class="note">
+    The live app does not run on this page. GitHub Pages serves static files only, and the app loads about 8 GB of models.
+    Run the app on a Mac with the setup steps in the README, or read the saved run and results below.
+  </div>
+
+  <h2>At a glance</h2>
+  <div class="stats card">
+    <div class="stat"><div class="num">10</div><div class="label">synthetic Hindi lectures</div></div>
+    <div class="stat"><div class="num">50</div><div class="label">quiz questions, all lectures valid</div></div>
+    <div class="stat"><div class="num">7.0%</div><div class="label">average speech word error rate</div></div>
+    <div class="stat"><div class="num">38 / 50</div><div class="label">answers marked correct (AI reviewer)</div></div>
+  </div>
+
+  <h2>The app</h2>
+  <figure>
+    <img src="screenshots/app_home_light.png" alt="Lecture in, notes and quiz out: the input panel on the left, the result tabs on the right" width="1280" height="1100" loading="lazy">
+    <figcaption>The Gradio page: upload or paste a lecture, then read the notes, quiz, English translation and transcript in tabs.</figcaption>
+  </figure>
+
+  <h2>Results</h2>
+  <div class="table-wrap">
+  <table>
+    <thead>
+      <tr><th>Lecture</th><th>Topic</th><th class="num">Word error rate</th><th class="num">Character error rate</th><th class="num">Quiz retries</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>01</td><td>Newton's laws</td><td class="num">7.1%</td><td class="num">2.2%</td><td class="num">1</td></tr>
+      <tr><td>02</td><td>Photosynthesis</td><td class="num">2.4%</td><td class="num">0.7%</td><td class="num">1</td></tr>
+      <tr><td>03</td><td>Water cycle</td><td class="num">1.4%</td><td class="num">0.3%</td><td class="num">0</td></tr>
+      <tr><td>04</td><td>Indian Constitution</td><td class="num">2.9%</td><td class="num">1.1%</td><td class="num">0</td></tr>
+      <tr><td>05</td><td>Human heart</td><td class="num">10.4%</td><td class="num">3.2%</td><td class="num">1</td></tr>
+      <tr><td>06</td><td>Computer functions</td><td class="num">6.8%</td><td class="num">2.2%</td><td class="num">1</td></tr>
+      <tr><td>07</td><td>Earth's layers</td><td class="num">15.9%</td><td class="num">4.2%</td><td class="num">1</td></tr>
+      <tr><td>08</td><td>Blood components</td><td class="num">16.4%</td><td class="num">5.7%</td><td class="num">1</td></tr>
+      <tr><td>09</td><td>Solar system</td><td class="num">5.3%</td><td class="num">2.6%</td><td class="num">0</td></tr>
+      <tr><td>10</td><td>Energy conservation</td><td class="num">1.3%</td><td class="num">0.3%</td><td class="num">0</td></tr>
+      <tr><td></td><td><strong>Average</strong></td><td class="num"><strong>7.0%</strong></td><td class="num"><strong>2.2%</strong></td><td class="num">6 of 10 lectures</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p style="margin-top:14px">Quiz review: 38 of 50 answers marked correct and 38 of 50 supported by the lecture text, by one AI reviewer. No person has checked these labels yet.</p>
+
+  <h2>Read more</h2>
+  <ul class="links">
+    <li><a href="Project_report_Lecture_Notes_and_Quiz.docx">Project report (.docx)</a></li>
+    <li><a class="secondary" href="https://github.com/switchtwitch12345/lecture-notes-quiz/blob/main/results/demo/lecture_04.md">Saved demo run, lecture 4</a></li>
+    <li><a class="secondary" href="https://github.com/switchtwitch12345/lecture-notes-quiz">Source code on GitHub</a></li>
+  </ul>
+
+  <h2>Run it locally</h2>
+  <pre>python3.11 -m venv .venv
+.venv/bin/python -m pip install -r requirements.txt
+python3.11 -m venv .venv-translate
+.venv-translate/bin/python -m pip install -r requirements-translate.txt
+sh scripts/fetch_sravaani.sh
+.venv/bin/python app.py</pre>
+  <p>Requires macOS on Apple Silicon. IndicTrans2 is gated on Hugging Face: accept its terms, then log in with <code>hf auth login</code>. The full setup is in the README.</p>
+
+  <footer>
+    Mitul · CS3235 mini project · Models: SraVaani-1.0, IndicTrans2 1B, Qwen2.5-1.5B-Instruct · Built with Gradio.
+  </footer>
+</main>
+</body>
+</html>
